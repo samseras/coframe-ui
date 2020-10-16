@@ -4,6 +4,7 @@
 <!--   顶部统计卡片   -->
       <summary-card></summary-card>
     </div>
+<!--    搜索-->
     <div class="agent-search-phone" v-if="device === 'phone'">
       <div class="agent-search-input">
         <el-input
@@ -32,6 +33,7 @@
         <i class="icon-th-list" :class="activeType === 'list' ? 'active-toggle' : ''"></i>
       </div>
     </div>
+<!--    主体-->
     <div class="agent-body">
       <el-card
         shadow="hover"
@@ -206,6 +208,7 @@ export default {
     }
   },
   methods: {
+    // 搜索
     onSearch () {
       if (this.searchSome === '') {
         this.currentAgentTypeChange(this.activeName)
@@ -217,15 +220,18 @@ export default {
         })
       }
     },
+    // 切换选项卡查数据
     currentAgentTypeChange (type) {
       if (type === 'All') this.agentList = this.cloneAgentList
       else this.agentList = this.cloneAgentList.filter(item => item.category === type)
     },
+    // 打开添加浏览器弹框
     addBrowserHandle (idx) {
       this.currentIndex = idx
       if (this.device === 'phone') this.$refs.addBrowserDrawer.show()
       if (this.device === 'desktop' || this.device === 'mobile') this.$refs.addBrowserDialog.show()
     },
+    // 添加浏览器到数据
     addResource (browser) {
       this.agentList.forEach((item, index) => {
         if (this.currentIndex === index) {
@@ -233,9 +239,7 @@ export default {
         }
       })
     },
-    handleClick (data) {
-      console.log(data)
-    },
+    // 删除
     deleteBrowser (bor, row) {
       row.browser = row.browser.filter(item => item !== bor)
     },
@@ -247,8 +251,7 @@ export default {
     showPopoverHandler (row) {
       console.log(row, 'sss')
       row.showPopover = true
-    },
-    close () {},
+    }
   }
 }
 </script>

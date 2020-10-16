@@ -137,5 +137,19 @@ export default {
       }
     }
   }
+  @media screen and (max-width: 768px){
+    .agent-cart-content{
+      height: 100px;
+      i{
+        font-size: 110px;
+        line-height: 100px;
+      }
+    }
+    .summary{
+      p{
+        line-height: 50px !important;
+      }
+    }
+  }
 }
 </style>

@@ -5,12 +5,6 @@ Vue.use(Router)
 import Layout from '../views/layout/Layout'
 //
  export const constantRouterMap = [
-  {
-    path: '/login',
-    name: 'login',
-    component:  resolve => require(['@/views/login/index'], resolve),
-    hidden: true,
-  },
   { path: '/404', component: resolve => require(['@/views/errorPage/404'], resolve), hidden: true },
   { path: '/401', component: resolve => require(['@/views/errorPage/401'], resolve), hidden: true },
 ]

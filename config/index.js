@@ -6,7 +6,7 @@ const path = require('path')
 
 module.exports = {
   dev: {
-    title: '中国移动',
+    title: 'ThoughtWorks',
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
