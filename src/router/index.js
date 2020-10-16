@@ -2,21 +2,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router)
-// const route = [
-//     {
-//     path: '/login',
-//     name: 'login',
-//     component:  resolve => require(['@/views/login/index'], resolve),
-//     hidden: true,
-//   },
-//   {
-//     path: '/',
-//     name: 'layout',
-//     component:  resolve => require(['@/views/Layout/Layout'], resolve),
-//     hidden: true,
-//   },
-//
-// ]
 import Layout from '../views/layout/Layout'
 //
  export const constantRouterMap = [
@@ -33,21 +18,33 @@ export const asyncRouterMap = [
   {
     path: '',
     component: Layout,
-    redirect: 'dashboard',
+    redirect: 'agent',
     children: [
       {
-        path: 'dashboard',
-        component: resolve => require(['@/views/dashboard/index'], resolve),
+        path: '/dashboard',
+        component: resolve => require(['@/views/dashboard.vue'], resolve),
         name: 'dashboard',
-        meta: { title: '概要', icon: 'dashboard' ,noCache:true,},
+        meta: { title: 'DASHBOARD', icon: 'icon-dashboard' },
       },
       {
-        path: 'text',
-        component: resolve => require(['@/views/text'], resolve),
-        name: 'text',
-        meta: { title: '测试', icon: 'dashboard' ,noCache:true,},
+        path: '/agent',
+        component: resolve => require(['@/views/agent/index'], resolve),
+        name: 'agent',
+        meta: { title: 'AGENT', icon: 'icon-sitemap' },
+      },
+      {
+        path: '/cruise',
+        component: resolve => require(['@/views/cruise.vue'], resolve),
+        name: 'cruise',
+        meta: { title: 'MY CRUISE', icon: 'icon-boat' },
+      },
+      {
+        path: '/help',
+        component: resolve => require(['@/views/help.vue'], resolve),
+        name: 'help',
+        meta: { title: 'HELP', icon: 'icon-life-bouy' },
       }
-    ],
+    ]
   },
 ]
 

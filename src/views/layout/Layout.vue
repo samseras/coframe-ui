@@ -1,17 +1,15 @@
 <template>
-  <div class="app-wrapper" :class="classObj">
-    <div v-if="device === 'mobile' && sidebar.opened" class="drawer-bg" @click="handleClickOutside"></div>
-    <sidebar  v-if="!isFullModel" class="sidebar-container"></sidebar>
-    <div class="main-container" :style="isFullModel?'margin-left:0px;':''">
-      <navbar></navbar>
-      <tags-view v-if="!isFullModel"></tags-view>
-      <app-main  :style="`height:calc(100vh - ${isFullModel ? 54: 84}px);`"></app-main>
+  <div :class="classObj">
+    <navbar></navbar>
+    <div class="app-wrapper">
+      <sidebar  v-if="!isFullModel" class="sidebar-container"></sidebar>
+      <app-main class="main-container" :style="`height:calc(100vh - ${isFullModel ? 54: 54}px);`"></app-main>
     </div>
   </div>
 </template>
 
 <script>
-import { Navbar, Sidebar, AppMain, TagsView } from './components'
+import { Navbar, Sidebar, AppMain } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
 
 export default {
@@ -19,8 +17,7 @@ export default {
   components: {
     Navbar,
     Sidebar,
-    AppMain,
-    TagsView,
+    AppMain
   },
   mixins: [ResizeMixin],
   computed: {
@@ -34,7 +31,7 @@ export default {
       return {
         hideSidebar: !this.sidebar.opened,
         withoutAnimation: this.sidebar.withoutAnimation,
-        mobile: this.device === 'mobile',
+        mobile: this.device === 'mobile' || this.device === 'phone',
       }
     },
   },
@@ -58,7 +55,9 @@ export default {
   @include clearfix;
   position: relative;
   height: 100%;
-  width: 100%;
+  //width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 .drawer-bg {
   background: #000;

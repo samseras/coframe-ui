@@ -1,22 +1,21 @@
 <template>
   <el-scrollbar wrapClass="scrollbar-wrapper">
-    <div class="logo">
-      <img src="../../../../../static/images/logo.png"
-           style="transform:translate(0px, -4px);width:26px;vertical-align: middle;"></img>
-      <!--<svg-icon iconClass="rotate" style="margin-right:0px;"></svg-icon>-->
-      <span v-if="!isCollapse">{{ config.shortTitle }}</span>
-    </div>
     <el-menu
       mode="vertical"
       :show-timeout="200"
       :default-active="$route.path"
-      :collapse="isCollapse"
       background-color="#304156"
-      text-color="#ffffff"
-      active-text-color="#409EFF"
+      text-color="#efefef"
+      active-text-color="#0084CF"
+      :router="true"
     >
-      <sidebar-item :routes="routers"></sidebar-item>
+<!--      <sidebar-item :routes="routers"></sidebar-item>-->
+      <el-menu-item :index="item.path" v-for="item in routers" :key="item.name">
+        <i :class="item.meta.icon"></i>
+        <span slot="title">{{item.meta.title}}</span>
+      </el-menu-item>
     </el-menu>
+    <history class="his-map"></history>
   </el-scrollbar>
 </template>
 
@@ -25,23 +24,18 @@
   import SidebarItem from './SidebarItem'
   import {constantRouterMap, asyncRouterMap} from '@/router'
   import Vue from 'vue'
+  import History from './History'
 
   export default {
-    components: {SidebarItem},
+    components: {SidebarItem, History},
     computed: {
       ...mapGetters(['permission_routers', 'sidebar']),
       routers() {
-        // return []
-        // if (Vue.config.login_type === 'pass') {
-          return constantRouterMap.concat(asyncRouterMap)
-        // }
-        // else {   //If u wan't to pass login, take effect this line
-        //   return this.permission_routers
-        // }
+          return asyncRouterMap[0].children
       },
-      isCollapse() {
-        return !this.sidebar.opened
-      },
+      // isCollapse() {
+      //   return !this.sidebar.opened
+      // },
       menuDisable() {
         return !(this.$route.name === 'dashboard' && this.platform === null)
       },
@@ -55,14 +49,9 @@
   }
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
-  .logo {
-    height: 50px;
-    background: #409EFF;
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    line-height: 50px;
-    text-align: center;
-    cursor: pointer;
-  }
+.his-map{
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+}
 </style>

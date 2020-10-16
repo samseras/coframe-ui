@@ -1,5 +1,5 @@
 #app {
-  $left-width:140px;
+  $left-width:240px;
   // 主体区域
   .main-container {
     min-height: 100%;
@@ -11,9 +11,9 @@
     transition: width 0.28s;
     width: $left-width !important;
     height: 100%;
-    position: fixed;
+    position: absolute;
     font-size: 0px;
-    top: 0;
+    //top: 50px;
     bottom: 0;
     left: 0;
     z-index: 1001;
@@ -25,7 +25,7 @@
     .scrollbar-wrapper {
       overflow-x: hidden!important;
       .el-scrollbar__view {
-        height: calc(100% - 50px);
+        height: 100%;
       }
     }
     .is-horizontal {
@@ -51,10 +51,10 @@
   }
   .hideSidebar {
     .sidebar-container {
-      width: 36px !important;
+      //width: 36px !important;
     }
     .main-container {
-      margin-left: 36px;
+      //margin-left: 0px;
     }
     .submenu-title-noDropdown {
       padding-left: 10px !important;
@@ -123,5 +123,21 @@
     .sidebar-container {
       transition: none;
     }
+  }
+  .el-menu-item{
+    height: 45px ;
+    line-height: 45px ;
+    i{
+      margin: 0 5px;
+    }
+    &:hover{
+      color: #00B4CF !important;
+      i{
+        color: #00B4CF !important;
+      }
+    }
+  }
+  .el-menu-item.is-active{
+    color: #00B4CF !important;
   }
 }

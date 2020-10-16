@@ -15,8 +15,8 @@
       float:left;
       overflow: hidden;
       &>.el-submenu__title {
-        height: 50px;
-        line-height: 50px;
+        height: 45px;
+        line-height: 45px;
         padding-left: 10px !important;
         .el-submenu__icon-arrow {
           display: none;
@@ -37,5 +37,8 @@
   }
   .el-menu--collapse{
     width: 100%;
+  }
+  .el-menu--horizontal{
+    border-color: transparent;
   }
 }

@@ -14,10 +14,11 @@ import router from './router'
 import store from './store'
 
 import i18n from './lang' // Internationalization
-import './icons' // icon
+// import './icons' // icon
+import './assets/iconfont/fonts.css'
 
 import * as filters from './filters' // global filters
-import './views/common'
+// import './views/common'
 import ReadConfig from './utils/config.js'
 
 Vue.use(Element, {

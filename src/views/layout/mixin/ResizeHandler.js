@@ -2,6 +2,8 @@ import store from '@/store'
 
 const { body } = document
 const WIDTH = 1024
+const MOBILEWIDTH = 768
+const DESKTOPWIDTH = 1200
 const RATIO = 3
 export default {
   watch: {
@@ -15,23 +17,37 @@ export default {
     window.addEventListener('resize', this.resizeHandler)
   },
   mounted() {
-    const isMobile = this.isMobile()
-    if (isMobile) {
-      store.dispatch('toggleDevice', 'mobile')
+    const isTablet = this.isTablet()
+    const isPhone = this.isPhone()
+    if (isTablet || isPhone) {
+      store.dispatch('toggleDevice', isPhone ? 'phone' :isTablet ? 'mobile' : 'desktop')
       store.dispatch('closeSideBar', { withoutAnimation: true })
     }
   },
   methods: {
-    isMobile() {
+    isDesktop() {
+      const rect = body.getBoundingClientRect()
+      return rect.width - RATIO < DESKTOPWIDTH
+    },
+    isTablet() {
       const rect = body.getBoundingClientRect()
       return rect.width - RATIO < WIDTH
     },
+    isPhone () {
+      const rect = body.getBoundingClientRect()
+      return rect.width - RATIO < MOBILEWIDTH
+    },
     resizeHandler() {
       if (!document.hidden) {
-        const isMobile = this.isMobile()
-        store.dispatch('toggleDevice', isMobile ? 'mobile' : 'desktop')
+        const isTablet = this.isTablet()
+        const isPhone = this.isPhone()
+        const isDesktop = this.isDesktop()
+        if (isPhone) store.dispatch('toggleDevice', 'phone')
+        else if (isTablet) store.dispatch('toggleDevice', 'mobile')
+        else if (isDesktop) store.dispatch('toggleDevice', 'desktop')
+        else store.dispatch('toggleDevice', 'desktopHD')
 
-        if (isMobile) {
+        if (isTablet) {
           store.dispatch('closeSideBar', { withoutAnimation: true })
         }
       }
